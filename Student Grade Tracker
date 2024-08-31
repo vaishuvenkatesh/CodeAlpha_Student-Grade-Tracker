@@ -1,0 +1,113 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class StudentGradeTracker {
+    private ArrayList<Double> grades;
+    private Scanner scanner;
+
+    public StudentGradeTracker() {
+        this.grades = new ArrayList<>();
+        this.scanner = new Scanner(System.in);
+    }
+
+    public void run() {
+        while (true) {
+            System.out.println("1. Enter a grade");
+            System.out.println("2. Compute average, highest, and lowest scores");
+            System.out.println("3. Exit");
+            System.out.print("Choose an option: ");
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    enterGrade();
+                    break;
+                case 2:
+                    computeScores();
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please choose again.");
+            }
+        }
+    }
+
+    private void enterGrade() {
+        System.out.print("Enter a grade: ");
+        double grade = scanner.nextDouble();
+        grades.add(grade);
+        System.out.println("Grade added successfully!");
+    }
+
+    private void computeScores() {
+        if (grades.isEmpty()) {
+            System.out.println("No grades entered yet!");
+            return;
+        }
+
+        double sum = 0;
+        double highest = grades.get(0);
+        double lowest = grades.get(0);
+
+        for (double grade : grades) {
+            sum += grade;
+            if (grade > highest) {
+                highest = grade;
+            }
+            if (grade < lowest) {
+                lowest = grade;
+            }
+        }
+
+        double average = sum / grades.size();
+
+        System.out.println("Average score: " + average);
+        System.out.println("Highest score: " + highest);
+        System.out.println("Lowest score: " + lowest);
+    }
+
+    public static void main(String[] args) {
+        StudentGradeTracker tracker = new StudentGradeTracker();
+        tracker.run();
+    }
+}
+
+
+//OUTPUT
+
+1. Enter a grade
+2. Compute average, highest, and lowest scores
+3. Exit
+Choose an option: 1
+Enter a grade: 85
+Grade added successfully!
+
+1. Enter a grade
+2. Compute average, highest, and lowest scores
+3. Exit
+Choose an option: 1
+Enter a grade: 90
+Grade added successfully!
+
+1. Enter a grade
+2. Compute average, highest, and lowest scores
+3. Exit
+Choose an option: 1
+Enter a grade: 78
+Grade added successfully!
+
+1. Enter a grade
+2. Compute average, highest, and lowest scores
+3. Exit
+Choose an option: 2
+Average score: 84.33333333333333
+Highest score: 90.0
+Lowest score: 78.0
+
+1. Enter a grade
+2. Compute average, highest, and lowest scores
+3. Exit
+Choose an option: 3
+Exiting...
